@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{algorithm2e}
+
+\begin{document}
+\begin{algorithm}
+    \SetKwInOut{Input}{Input}
+
+    \underline{Harmonic Search}\;
+    \Input{
+    	$f_{fitness}$, $LB_p$, $ UB_p$, $p_{hmcr}$, $p_{par}$, $b_w$, 
+    	$N_i$, $std$ \;}
+    
+    	Create $HM_{hms,p}$ with each $x_{p} \sim\ U(LB_p, UB_p)$ \;
+    	Calculate $HM_{fitness}$ \;
+    	$counter = 0$ \;	
+	\Repeat{$counter = N_i$ or $sd(HM_{fitness}) < std$}{
+		
+		\For{$x_p$ with $p \in [1, p]$}{
+			\eIf{$ n_p  \sim U(0,1) \leq p_{hmcr}$}
+			{
+				$x'_p = x^j_p$, where $j \sim\ U(0,hms)$\;
+				\If{$n_p  \sim U(0,1) \leq p_{par}$}{
+				$x'_p = x'_p + r􏰗  \cdot  b_w$, where $r \sim\ U(-1,1)$}
+			}
+			{
+				$x'_p = z $, where $z \sim\ U(LB_p, UB_p)$\;
+			}
+	}
+		\If{$f(x'_p) < max(HM_{fitness})$}{
+			$f(x^{max}_p) \notin HM_{fitness}$ and $x^{max}_p \notin HM_{hms,p}$\;
+			$f(x'_p) \in HM_{fitness}$ and $x'_p \in HM_{hms,p}$}
+	$counter + 1$ \;
+	}
+    
+\end{algorithm}
+\end{document} 
